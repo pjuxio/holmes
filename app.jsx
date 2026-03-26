@@ -401,7 +401,7 @@ function App() {
         method: "POST",
         headers: API_CONFIG.headers,
         body: JSON.stringify({
-          model: "claude-3-5-haiku-20241022",
+          model: "claude-haiku-4-20250514",
           max_tokens: 1024,
           stream: true,
           system: SYSTEM_PROMPT,
