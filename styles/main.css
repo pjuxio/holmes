@@ -387,7 +387,7 @@ a:focus-visible {
 
 .chat__input {
   flex: 1;
-  background: transparent;
+  background: var(--color-chat-bg);
   border: none;
   color: var(--color-chat-text);
   font-size: var(--text-base);
