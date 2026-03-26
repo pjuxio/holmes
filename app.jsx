@@ -347,7 +347,7 @@ function App() {
         
         return { ...r, _score: score };
       })
-      .filter(r => r._score > 0)
+      .filter(r => r._score >= 2)  // Require stronger matches to filter incidental hits
       .sort((a, b) => b._score - a._score)
       .slice(0, 60);
   };
@@ -466,7 +466,7 @@ function App() {
       // After streaming completes, extract and add resource cards
       // Only show cards if we had meaningful candidate matches for the query
       // This prevents cards appearing when Claude's redirect response mentions topic keywords
-      const mentionedResources = candidates.length >= 3 
+      const mentionedResources = candidates.length >= 5 
         ? extractMentionedResources(fullContent, candidates)
         : [];
       setMessages(prev => {
