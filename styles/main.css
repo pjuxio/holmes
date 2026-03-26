@@ -19,6 +19,9 @@
   --color-border: #7a3570;            /* Subtle purple border */
   --color-error: #d45656;             /* Error red */
   --color-success: #56a878;           /* Success green */
+  --color-chat-bg: #f2ebd5;           /* Chat window cream */
+  --color-chat-text: #171615;         /* Chat window black text */
+  --color-button-primary: #401338;    /* Purple send button */
 
   /* Typography */
   --font-heading: 'Josefin Sans', sans-serif;
@@ -376,7 +379,7 @@ a:focus-visible {
 .chat__input-form {
   display: flex;
   gap: var(--space-2);
-  background: var(--color-bg-secondary);
+  background: var(--color-chat-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-lg);
   padding: var(--space-2);
@@ -386,7 +389,7 @@ a:focus-visible {
   flex: 1;
   background: transparent;
   border: none;
-  color: var(--color-text-primary);
+  color: var(--color-chat-text);
   font-size: var(--text-base);
   font-family: inherit;
   padding: var(--space-2) var(--space-3);
@@ -394,14 +397,14 @@ a:focus-visible {
 }
 
 .chat__input::placeholder {
-  color: var(--color-text-muted);
+  color: #666;
 }
 
 .chat__submit {
-  background: var(--color-accent-primary);
+  background: var(--color-button-primary);
   border: none;
   border-radius: var(--border-radius);
-  color: var(--color-bg-primary);
+  color: #fff;
   font-size: var(--text-sm);
   font-weight: 600;
   padding: var(--space-2) var(--space-4);
@@ -410,7 +413,7 @@ a:focus-visible {
 }
 
 .chat__submit:hover:not(:disabled) {
-  background: var(--color-accent-secondary);
+  background: #5a1d4e;
 }
 
 .chat__submit:disabled {
