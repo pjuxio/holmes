@@ -1,15 +1,10 @@
 [build]
   publish = "."
-  functions = "netlify/functions"
 
-[functions]
-  node_bundler = "esbuild"
-
-# Redirect /api/chat to the Netlify Function
-[[redirects]]
-  from = "/api/chat"
-  to = "/.netlify/functions/chat"
-  status = 200
+# Edge function for /api/chat
+[[edge_functions]]
+  path = "/api/chat"
+  function = "chat"
 
 # SPA fallback - serve index.html for all routes
 [[redirects]]

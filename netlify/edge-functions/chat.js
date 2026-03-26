@@ -7,8 +7,8 @@ export default async (request, context) => {
     return new Response('Method not allowed', { status: 405 });
   }
 
-  // Get API key from environment variable
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  // Get API key from environment variable (Deno syntax for Edge Functions)
+  const apiKey = Deno.env.get('ANTHROPIC_API_KEY');
   if (!apiKey) {
     console.error('ANTHROPIC_API_KEY not configured');
     return new Response(JSON.stringify({ error: 'API key not configured' }), {
@@ -57,8 +57,4 @@ export default async (request, context) => {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-};
-
-export const config = {
-  path: '/api/chat'
 };
