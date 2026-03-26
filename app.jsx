@@ -56,6 +56,60 @@ const STARTER_PROMPTS = [
   "Resources on climate policy and advocacy"
 ];
 
+// Broken URLs to exclude from search results (validated 2026-03-26)
+const BROKEN_URLS = new Set([
+  "https://itif.org/2022-climate-tech-policy-boot-camp-early-career-researchers",
+  "https://apps.apple.com/us/app/alkeme-black-mental-health/id1597094313",
+  "http://www.campionadvocacyfund.org/wp-content/uploads/resource-files/Case-for-support-outline.pdf",
+  "https://www.ashtracker.org/",
+  "https://bantusafehaven.org/",
+  "https://www.birthmarkdoulas.com/pageus",
+  "https://www.blackfemmelegal.com/about-us",
+  "https://blackoutcollective.org/action-fund/",
+  "https://democracycollaborative.org/publications/building-resiliency-through-green-infrastructure-a-community-wealth-building-appoach",
+  "https://www.rockefellerfoundation.org/wp-content/uploads/City-Resilience-Framework-2015.pdf",
+  "https://www.climatepsychology.us/climate-therapists",
+  "https://www.climatepsychology.us/101",
+  "https://www.ourclimatevoices.org/climate-visions",
+  "https://www.cooperativecatalyst.coop/",
+  "http://www.cflsp.org/",
+  "https://www.blackwomensblueprint.org/copy-of-seeding-health",
+  "https://democracycollaborative.org/programs/cwb",
+  "https://www.disabledgirlswholift.com/podcast",
+  "https://www.intersectionalenvironmentalist.com/dismantled-podcast",
+  "https://lternet.edu/network-organization/diversity-resources/",
+  "https://www.dscej.org/our-work/worker-health-and-safety-training",
+  "https://www.epa.gov/environmentaljustice/environmental-justice-grants-funding-and-technical-assistance",
+  "https://www.ceejh.center/summer-scholars-program",
+  "https://www.oregon.gov/Library/libraries/Documents/OLA%20EDI%20Toolkit/OLA_TOOLKIT_Hard_Copy%202021_02_11.pdf",
+  "http://www.campionadvocacyfund.org/wp-content/uploads/resource-files/DevoPlanDashboards.pdf",
+  "https://seflorida.uli.org/wp-content/uploads/sites/13/2018/06/ULI_TDR_Focus_Group_Report-1.pdf",
+  "https://fatcampretreat.com/",
+  "https://www.freedomfarmazul.com/",
+  "https://www.fundforfrontlinepower.org/apply-for-funding",
+  "https://generativesomatics.org/resources/",
+  "https://www.willempower.org/innovative-women-fellowship-program/",
+  "https://apps.apple.com/us/app/liberate-cx/id1451620569",
+  "https://connect.pachamama.org/node/2309",
+  "https://www.landusetoolkit.cpex.org/",
+  "http://www.campionadvocacyfund.org/wp-content/uploads/resource-files/SurvivalKit_090613.pdf",
+  "http://www.thirdwavefund.org/podcast.html",
+  "https://www.nfwf.org/programs/national-coastal-resilience-fund/national-coastal-resilience-fund-2023-request-proposals",
+  "https://nqttcn.com/en/",
+  "https://nycworker.coop/homepage/",
+  "https://pecanmilk.coop/home",
+  "https://www.justtransitionak.org/regeneration",
+  "https://www.asla.org/uploadedFiles/CMS/About__Us/Climate_Blue_Ribbon/climate%20interactive3.pdf",
+  "https://www.gofundme.com/f/stellarroots",
+  "https://www.barrfoundation.org/barr-fellowship#program-overview",
+  "https://www.epa.gov/environmentaljustice/environmental-justice-collaborative-problem-solving-cooperative-agreement-5",
+  "https://www.intersectionalenvironmentalist.com/the-joy-report",
+  "https://podcasts.apple.com/us/podcast/think-100-the-coolest-show/id1373887480",
+  "https://www.tranzzlation.org/team-3",
+  "https://www.trapvinyasa.com/",
+  "https://unlikelyhikers.org/events/"
+]);
+
 // =============================================================================
 // Resource Card Component
 // =============================================================================
@@ -210,7 +264,11 @@ function App() {
         if (!res.ok) throw new Error("Failed to load resources");
         return res.json();
       })
-      .then(data => setResources(data))
+      .then(data => {
+        // Filter out resources with broken URLs
+        const validResources = data.filter(r => !BROKEN_URLS.has(r.url));
+        setResources(validResources);
+      })
       .catch(err => {
         console.error("Error loading resources:", err);
         setError("Failed to load resource library. Please refresh the page.");
