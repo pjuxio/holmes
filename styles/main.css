@@ -8,7 +8,7 @@
    ----------------------------------------------------------------------------- */
 :root {
   /* Colors — TCLP Brand Palette */
-  --color-bg-primary: #401338;        /* TCLP deep purple/burgundy */
+  --color-bg-primary: rgb(23, 22, 21);        /* Dark charcoal */
   --color-bg-secondary: #5a1d4e;      /* Slightly lighter purple */
   --color-bg-card: #6e2760;           /* Card backgrounds */
   --color-accent-primary: #d9e026;    /* TCLP yellow-green */
