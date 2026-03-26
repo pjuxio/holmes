@@ -406,7 +406,11 @@ function App() {
       }
       
       // After streaming completes, extract and add resource cards
-      const mentionedResources = extractMentionedResources(fullContent, candidates);
+      // Only show cards if we had meaningful candidate matches for the query
+      // This prevents cards appearing when Claude's redirect response mentions topic keywords
+      const mentionedResources = candidates.length >= 3 
+        ? extractMentionedResources(fullContent, candidates)
+        : [];
       setMessages(prev => {
         const updated = [...prev];
         updated[assistantMessageIndex] = {
